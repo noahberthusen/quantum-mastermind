@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\H.png"
+   inkscape:export-xdpi="185.7"
+   inkscape:export-ydpi="185.7"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="gameassets.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="279.53924"
+     inkscape:cy="515.15045"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="3840"
+     inkscape:window-height="2004"
+     inkscape:window-x="4784"
+     inkscape:window-y="-16"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+       id="rect825"
+       width="14.598137"
+       height="14.598137"
+       x="117.8152"
+       y="126.95206"
+       ry="4.1708965"
+       inkscape:export-xdpi="185.7"
+       inkscape:export-ydpi="185.7" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.92763519px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.99999988;stroke-miterlimit:4;stroke-dasharray:none"
+       x="122.33704"
+       y="137.02626"
+       id="text829"
+       inkscape:export-xdpi="185.7"
+       inkscape:export-ydpi="185.7"><tspan
+         sodipodi:role="line"
+         id="tspan827"
+         x="122.33704"
+         y="137.02626"
+         style="stroke-width:1.99999988;stroke-miterlimit:4;stroke-dasharray:none">H</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot872"
+       style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:24px;line-height:1.25;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion874"><rect
+           id="rect876"
+           width="472.5"
+           height="136.42857"
+           x="85"
+           y="573.23395" /></flowRegion><flowPara
+         id="flowPara878"></flowPara></flowRoot>    <circle
+       style="fill:#778899;fill-opacity:0.97902096;stroke:#000000;stroke-width:2;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.00699301;paint-order:normal"
+       id="path880"
+       cx="63.16927"
+       cy="189.702"
+       inkscape:export-xdpi="185.7"
+       inkscape:export-ydpi="185.7"
+       r="6.000371" />
+  </g>
+</svg>
