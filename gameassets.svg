@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="279.53924"
-     inkscape:cy="515.15045"
+     inkscape:zoom="5.6"
+     inkscape:cx="380.67919"
+     inkscape:cy="471.33901"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -47,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -88,7 +88,7 @@
            height="136.42857"
            x="85"
            y="573.23395" /></flowRegion><flowPara
-         id="flowPara878"></flowPara></flowRoot>    <circle
+         id="flowPara878" /></flowRoot>    <circle
        style="fill:#778899;fill-opacity:0.97902096;stroke:#000000;stroke-width:2;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.00699301;paint-order:normal"
        id="path880"
        cx="63.16927"
@@ -96,5 +96,100 @@
        inkscape:export-xdpi="185.7"
        inkscape:export-ydpi="185.7"
        r="6.000371" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.80000001;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+       id="rect825-1"
+       width="14.598137"
+       height="14.598137"
+       x="111.19646"
+       y="162.60643"
+       ry="4.1708965"
+       inkscape:export-xdpi="185.7"
+       inkscape:export-ydpi="185.7"
+       inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\X.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.92763519px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.99999988;stroke-miterlimit:4;stroke-dasharray:none"
+       x="115.71832"
+       y="172.68063"
+       id="text829-1"
+       inkscape:export-xdpi="185.7"
+       inkscape:export-ydpi="185.7"
+       inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\X.png"><tspan
+         sodipodi:role="line"
+         id="tspan827-6"
+         x="115.71832"
+         y="172.68063"
+         style="stroke-width:1.99999988;stroke-miterlimit:4;stroke-dasharray:none">X</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot862"
+       style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:24px;line-height:1.25;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion864"><rect
+           id="rect866"
+           width="103.57143"
+           height="104.46429"
+           x="394.64285"
+           y="593.59113" /></flowRegion><flowPara
+         id="flowPara868"></flowPara></flowRoot>    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.80000001;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+       id="rect825-14"
+       width="14.598137"
+       height="14.598137"
+       x="128.25264"
+       y="189.91522"
+       ry="4.1708965"
+       inkscape:export-xdpi="185.7"
+       inkscape:export-ydpi="185.7"
+       inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\Z.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.92763519px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.99999988;stroke-miterlimit:4;stroke-dasharray:none"
+       x="132.77448"
+       y="199.98943"
+       id="text829-5"
+       inkscape:export-xdpi="185.7"
+       inkscape:export-ydpi="185.7"
+       inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\Z.png"><tspan
+         sodipodi:role="line"
+         id="tspan827-8"
+         x="132.77448"
+         y="199.98943"
+         style="stroke-width:1.99999988;stroke-miterlimit:4;stroke-dasharray:none">Z</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot880"
+       style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:24px;line-height:1.25;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion882"><rect
+           id="rect884"
+           width="90.89286"
+           height="91.428574"
+           x="467.5"
+           y="701.62683" /></flowRegion><flowPara
+         id="flowPara886"></flowPara></flowRoot>    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.80000001;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+       id="rect825-17"
+       width="14.598137"
+       height="14.598137"
+       x="74.06031"
+       y="155.56664"
+       ry="4.1708965"
+       inkscape:export-xdpi="185.7"
+       inkscape:export-ydpi="185.7"
+       inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\Y.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.92763519px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.99999988;stroke-miterlimit:4;stroke-dasharray:none"
+       x="79.064072"
+       y="165.78258"
+       id="text829-0"
+       inkscape:export-xdpi="185.7"
+       inkscape:export-ydpi="185.7"
+       inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\Y.png"><tspan
+         sodipodi:role="line"
+         id="tspan827-0"
+         x="79.064072"
+         y="165.78258"
+         style="stroke-width:1.99999988;stroke-miterlimit:4;stroke-dasharray:none">Y</tspan></text>
   </g>
 </svg>

@@ -2,6 +2,7 @@
 Solitaire clone.
 """
 import arcade
+import json
 
 # Screen title and size
 SCREEN_WIDTH = 1024
@@ -54,6 +55,7 @@ class QMastermind(arcade.Window):
         self.held_gate = None
         self.wires_list = None
         self.nodes_list = None
+        self.gui_list = None
         self.level = 1
 
     def setup(self):
@@ -62,8 +64,8 @@ class QMastermind(arcade.Window):
         self.wires_list = arcade.SpriteList(is_static=True)
         self.nodes_list = arcade.SpriteList(is_static=True)
 
-        # self.held_gate = []
-        # self.held_gate_original_position = []
+        # draw gate library
+
 
         # draw the 'circuitboard'
         for i in range(4):
@@ -81,17 +83,44 @@ class QMastermind(arcade.Window):
 
     def load_level(self, level):
         # read in a text file with the allowed gates
-        
-        for i in range(2):
-            gate = Gate('H', GATE_SCALE)
-            gate.position = 100, 100
-            gate.inital_position = gate.position
-            self.gate_list.append(gate)
+        with open('levels.json') as f:
+            level_data = json.load(f)
+
+            level = level_data[f'level{self.level}']
+            for i in range(level['H']):
+                gate = Gate('H', GATE_SCALE)
+                gate.position = 100, 100
+                gate.inital_position = gate.position
+                self.gate_list.append(gate)
+            for i in range(level['X']):
+                gate = Gate('X', GATE_SCALE)
+                gate.position = 100, 325
+                gate.inital_position = gate.position
+                self.gate_list.append(gate)
+            for i in range(level['Y']):
+                gate = Gate('Y', GATE_SCALE)
+                gate.position = 100, 250
+                gate.inital_position = gate.position
+                self.gate_list.append(gate)
+            for i in range(level['Z']):
+                gate = Gate('Z', GATE_SCALE)
+                gate.position = 100, 175
+                gate.inital_position = gate.position
+                self.gate_list.append(gate)
+            for i in range(level['CX']):
+                gate = Gate('CX', GATE_SCALE)
+                gate.position = 100, 400
+                gate.inital_position = gate.position
+                self.gate_list.append(gate)
 
     def on_draw(self):
         """ Render the screen. """
         # Clear the screen
         arcade.start_render()
+
+        arcade.draw_rectangle_filled(100, 240, 100, 420, arcade.color.LIGHT_GRAY)
+        arcade.draw_rectangle_filled(800, 240, 360, 420, arcade.color.LIGHT_GRAY)
+
 
         self.wires_list.draw()
         self.nodes_list.draw()
