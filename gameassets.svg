@@ -28,11 +28,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.6"
-     inkscape:cx="380.67919"
-     inkscape:cy="471.33901"
+     inkscape:zoom="7.9195959"
+     inkscape:cx="268.7186"
+     inkscape:cy="478.07183"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="false"
      inkscape:window-width="3840"
      inkscape:window-height="2004"
@@ -103,24 +103,10 @@
        height="14.598137"
        x="111.19646"
        y="162.60643"
-       ry="4.1708965"
+       ry="0"
        inkscape:export-xdpi="185.7"
        inkscape:export-ydpi="185.7"
        inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\X.png" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:7.92763519px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.99999988;stroke-miterlimit:4;stroke-dasharray:none"
-       x="115.71832"
-       y="172.68063"
-       id="text829-1"
-       inkscape:export-xdpi="185.7"
-       inkscape:export-ydpi="185.7"
-       inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\X.png"><tspan
-         sodipodi:role="line"
-         id="tspan827-6"
-         x="115.71832"
-         y="172.68063"
-         style="stroke-width:1.99999988;stroke-miterlimit:4;stroke-dasharray:none">X</tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot862"
@@ -131,7 +117,7 @@
            height="104.46429"
            x="394.64285"
            y="593.59113" /></flowRegion><flowPara
-         id="flowPara868"></flowPara></flowRoot>    <rect
+         id="flowPara868" /></flowRoot>    <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.80000001;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
        id="rect825-14"
        width="14.598137"
@@ -166,8 +152,55 @@
            height="91.428574"
            x="467.5"
            y="701.62683" /></flowRegion><flowPara
-         id="flowPara886"></flowPara></flowRoot>    <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.80000001;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+         id="flowPara886" /></flowRoot>    <circle
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.80000007;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+       id="path845"
+       cx="91.212593"
+       cy="188.78874"
+       r="5.6986985"
+       inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\CX.png"
+       inkscape:export-xdpi="185.7"
+       inkscape:export-ydpi="185.7"
+       transform="rotate(0.47208209)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 89.716969,183.95508 0.01857,11.17662"
+       id="path851"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\CX.png"
+       inkscape:export-xdpi="185.7"
+       inkscape:export-ydpi="185.7" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 83.91739,189.60202 11.223363,-0.0277"
+       id="path855"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\CX.png"
+       inkscape:export-xdpi="185.7"
+       inkscape:export-ydpi="185.7" />
+    <path
+       style="fill:none;stroke:#fb0000;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 75.341883,168.8832 87.5068,156.71829"
+       id="path848"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\empty.png"
+       inkscape:export-xdpi="185.7"
+       inkscape:export-ydpi="185.7" />
+    <path
+       style="fill:none;stroke:#f70000;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 75.330071,156.8364 12.029692,12.02969"
+       id="path850"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\empty.png"
+       inkscape:export-xdpi="185.7"
+       inkscape:export-ydpi="185.7" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2">
+    <rect
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.8;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
        id="rect825-17"
        width="14.598137"
        height="14.598137"
@@ -176,20 +209,6 @@
        ry="4.1708965"
        inkscape:export-xdpi="185.7"
        inkscape:export-ydpi="185.7"
-       inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\Y.png" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:7.92763519px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.99999988;stroke-miterlimit:4;stroke-dasharray:none"
-       x="79.064072"
-       y="165.78258"
-       id="text829-0"
-       inkscape:export-xdpi="185.7"
-       inkscape:export-ydpi="185.7"
-       inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\Y.png"><tspan
-         sodipodi:role="line"
-         id="tspan827-0"
-         x="79.064072"
-         y="165.78258"
-         style="stroke-width:1.99999988;stroke-miterlimit:4;stroke-dasharray:none">Y</tspan></text>
+       inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\empty.png" />
   </g>
 </svg>

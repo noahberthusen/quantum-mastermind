@@ -17,6 +17,8 @@ GATE_HEIGHT = 50 * GATE_SCALE
 BOTTOM_Y = 300
 START_X = 230
 
+GATES = ['H', 'Z', 'Y', 'X', 'CX']
+
 class Gate(arcade.Sprite):
     """ Gate sprite """
 
@@ -40,6 +42,21 @@ class Node(arcade.Sprite):
         self.image_file_name = './images/node.png'
         self.gate = None
         super().__init__(self.image_file_name, scale)
+
+class Circuit():
+    """ Class to keep track of used and unused gates """
+
+    def __init__(self, nodes, gates):
+        self.nodes = nodes
+        self.gates = gates
+
+    def available_gates(self, gate):
+        s = 0
+        for node in self.nodes:
+            if (node.gate and node.gate.operator == gate):
+                s += 1
+        return self.gates[gate] - s
+
 
 class QMastermind(arcade.Window):
     """ Main application class. """
@@ -79,7 +96,8 @@ class QMastermind(arcade.Window):
                 self.nodes_list.append(node)
 
         # load gates in here
-        self.load_level(self.level)
+        level_data = self.load_level(self.level)
+        self.circuit = Circuit(self.nodes_list, level_data)
 
     def load_level(self, level):
         # read in a text file with the allowed gates
@@ -87,40 +105,31 @@ class QMastermind(arcade.Window):
             level_data = json.load(f)
 
             level = level_data[f'level{self.level}']
-            for i in range(level['H']):
-                gate = Gate('H', GATE_SCALE)
-                gate.position = 100, 100
-                gate.inital_position = gate.position
-                self.gate_list.append(gate)
-            for i in range(level['X']):
-                gate = Gate('X', GATE_SCALE)
-                gate.position = 100, 325
-                gate.inital_position = gate.position
-                self.gate_list.append(gate)
-            for i in range(level['Y']):
-                gate = Gate('Y', GATE_SCALE)
-                gate.position = 100, 250
-                gate.inital_position = gate.position
-                self.gate_list.append(gate)
-            for i in range(level['Z']):
-                gate = Gate('Z', GATE_SCALE)
-                gate.position = 100, 175
-                gate.inital_position = gate.position
-                self.gate_list.append(gate)
-            for i in range(level['CX']):
-                gate = Gate('CX', GATE_SCALE)
-                gate.position = 100, 400
-                gate.inital_position = gate.position
-                self.gate_list.append(gate)
+
+            for i in range(len(GATES)):
+                for j in range(level[GATES[i]]):
+                    gate = Gate(GATES[i], GATE_SCALE)
+                    gate.position = 100, (80 + i*75)
+                    gate.inital_position = gate.position
+                    self.gate_list.append(gate)
+                    
+        return level
 
     def on_draw(self):
         """ Render the screen. """
         # Clear the screen
         arcade.start_render()
 
-        arcade.draw_rectangle_filled(100, 240, 100, 420, arcade.color.LIGHT_GRAY)
-        arcade.draw_rectangle_filled(800, 240, 360, 420, arcade.color.LIGHT_GRAY)
+        arcade.draw_rectangle_filled(90, 240, 120, 420, arcade.color.LIGHT_GRAY)
+        arcade.draw_text('Gates', 55, 413, arcade.csscolor.BLACK, 22)
 
+        arcade.draw_rectangle_filled(800, 240, 360, 420, arcade.color.LIGHT_GRAY)
+        for i in range(4):
+            arcade.draw_circle_filled(230 + (i * 100), 60, 25, arcade.color.BLACK)
+        for i in range(5):
+            arcade.Sprite('./images/empty.png', scale=0.3, center_x=100, center_y=(80+i*75)).draw()
+        for i in range(len(GATES)):
+            arcade.draw_text(f'x{self.circuit.available_gates(GATES[i])}', 45, 70+(i*75), arcade.color.BLACK, 16)
 
         self.wires_list.draw()
         self.nodes_list.draw()
