@@ -30,9 +30,9 @@
      inkscape:pageshadow="2"
      inkscape:zoom="7.9195959"
      inkscape:cx="268.7186"
-     inkscape:cy="478.07183"
+     inkscape:cy="467.41632"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="3840"
      inkscape:window-height="2004"
@@ -89,13 +89,14 @@
            x="85"
            y="573.23395" /></flowRegion><flowPara
          id="flowPara878" /></flowRoot>    <circle
-       style="fill:#778899;fill-opacity:0.97902096;stroke:#000000;stroke-width:2;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.00699301;paint-order:normal"
+       style="fill:#c0c0c0;fill-opacity:0.98135197;stroke:#000000;stroke-width:2;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.00699301;paint-order:normal"
        id="path880"
        cx="63.16927"
        cy="189.702"
        inkscape:export-xdpi="185.7"
        inkscape:export-ydpi="185.7"
-       r="6.000371" />
+       r="6.000371"
+       inkscape:export-filename="C:\Users\nfberthusen\Documents\Projects\Quantum Computing\quantum-mastermind\images\node.png" />
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.80000001;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
        id="rect825-1"

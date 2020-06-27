@@ -3,6 +3,8 @@ Solitaire clone.
 """
 import arcade
 import json
+import numpy as np
+from qiskit import QuantumCircuit, execute, Aer
 
 # Screen title and size
 SCREEN_WIDTH = 1024
@@ -49,6 +51,9 @@ class Circuit():
     def __init__(self, nodes, gates):
         self.nodes = nodes
         self.gates = gates
+        self.backend = Aer.get_backend('statevector_simulator')
+        self.results = []
+        self.update_results()
 
     def available_gates(self, gate):
         s = 0
@@ -57,6 +62,32 @@ class Circuit():
                 s += 1
         return self.gates[gate] - s
 
+    def update_results(self):
+        self.results = []
+        for i in range(4):
+            qc = QuantumCircuit(1)
+            for j in range(3):
+                node = self.nodes[j + (3*i)]
+                if (not node.gate):
+                    pass
+                else:
+                    gate = node.gate
+                    if (gate.operator == 'X'):
+                        qc.x(0) # should be i
+                    elif (gate.operator == 'Y'):
+                        qc.y(0)
+                    elif (gate.operator == 'Z'):
+                        qc.z(0)
+                    elif (gate.operator == 'H'):
+                        qc.h(0)
+
+            res = execute(qc, self.backend).result()
+            print(res.get_statevector())
+            if (np.array_equal(res.get_statevector(), [0, 1])): # 0 state
+                self.results.append(arcade.color.WHITE)
+            else:
+                self.results.append(arcade.color.BLACK)
+        print(self.results)
 
 class QMastermind(arcade.Window):
     """ Main application class. """
@@ -67,10 +98,9 @@ class QMastermind(arcade.Window):
         # Gate list
         self.gate_list = None
 
-        arcade.set_background_color(arcade.color.WHITE_SMOKE)
+        arcade.set_background_color(arcade.color.GAINSBORO)
 
         self.held_gate = None
-        self.wires_list = None
         self.nodes_list = None
         self.gui_list = None
         self.level = 1
@@ -85,10 +115,6 @@ class QMastermind(arcade.Window):
 
 
         # draw the 'circuitboard'
-        for i in range(4):
-            wire = arcade.SpriteSolidColor(8, 300, arcade.color.LIGHT_SLATE_GRAY)
-            wire.position = START_X + (i * 100), 250
-            self.wires_list.append(wire)
         for i in range(4):
             for j in range(3):
                 node = Node(0.25) # node scale
@@ -112,7 +138,7 @@ class QMastermind(arcade.Window):
                     gate.position = 100, (80 + i*75)
                     gate.inital_position = gate.position
                     self.gate_list.append(gate)
-                    
+
         return level
 
     def on_draw(self):
@@ -120,12 +146,15 @@ class QMastermind(arcade.Window):
         # Clear the screen
         arcade.start_render()
 
-        arcade.draw_rectangle_filled(90, 240, 120, 420, arcade.color.LIGHT_GRAY)
+        for i in range(4):
+            arcade.draw_rectangle_filled(START_X + (i * 100), 250, 8, 300, arcade.color.SILVER)
+        arcade.draw_rectangle_filled(90, 240, 120, 420, arcade.color.SILVER)
         arcade.draw_text('Gates', 55, 413, arcade.csscolor.BLACK, 22)
 
-        arcade.draw_rectangle_filled(800, 240, 360, 420, arcade.color.LIGHT_GRAY)
+        arcade.draw_rectangle_filled(800, 240, 360, 420, arcade.color.SILVER)
         for i in range(4):
             arcade.draw_circle_filled(230 + (i * 100), 60, 25, arcade.color.BLACK)
+            arcade.draw_circle_filled(230 + (i * 100), 440, 25, self.circuit.results[i])
         for i in range(5):
             arcade.Sprite('./images/empty.png', scale=0.3, center_x=100, center_y=(80+i*75)).draw()
         for i in range(len(GATES)):
@@ -154,6 +183,7 @@ class QMastermind(arcade.Window):
         reset_position = True
         if arcade.check_for_collision(self.held_gate, node):
             if (not node.gate):
+                # update circuit in qiskit here
                 if (self.held_gate.node):
                     self.held_gate.node.gate = None
                 self.held_gate.position = node.center_x, node.center_y
@@ -168,6 +198,8 @@ class QMastermind(arcade.Window):
             self.held_gate.position = self.held_gate.inital_position
 
         self.held_gate = None
+        self.circuit.update_results()
+
 
     def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):
         """ User moves mouse """
