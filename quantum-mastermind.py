@@ -63,7 +63,9 @@ class Circuit():
         return self.gates[gate] - s
 
     def update_results(self):
+        arcade.finish_render()
         self.results = []
+        circuits = []
         for i in range(4):
             qc = QuantumCircuit(1)
             for j in range(3):
@@ -80,14 +82,17 @@ class Circuit():
                         qc.z(0)
                     elif (gate.operator == 'H'):
                         qc.h(0)
-
-            res = execute(qc, self.backend).result()
+            circuits.append(qc)
+        
+        for i in range(4):
+            res = execute(circuits[i], self.backend).result()
             print(res.get_statevector())
             if (np.array_equal(res.get_statevector(), [0, 1])): # 0 state
                 self.results.append(arcade.color.WHITE)
             else:
                 self.results.append(arcade.color.BLACK)
         print(self.results)
+        arcade.start_render()
 
 class QMastermind(arcade.Window):
     """ Main application class. """
