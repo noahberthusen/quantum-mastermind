@@ -150,6 +150,7 @@ class GameView(arcade.View):
         self.circuit = None
         self.guesses = None
         self.solution = None
+        self.won = False
         self.level = level
 
     def setup(self):
@@ -228,7 +229,6 @@ class GameView(arcade.View):
             for j in range(white):
                 arcade.draw_circle_filled(900 + (j * 20), 128 + (i * 53), 7, arcade.color.WHITE)
             
-
         self.button_list.draw()
         self.wires_list.draw()
         self.nodes_list.draw()
@@ -243,7 +243,7 @@ class GameView(arcade.View):
 
         buttons = arcade.get_sprites_at_point((x, y), self.button_list)
         if (buttons) :
-            if (buttons[0] == self.button_list[0]):
+            if (buttons[0] == self.button_list[0] and (not self.won)):
                 if (not (sum([self.circuit.available_gates(GATES[i]) for i in range(len(GATES))]) == 0)): # you must use all the gates
                     pass
                 else:
@@ -258,6 +258,10 @@ class GameView(arcade.View):
                         if code_peg == guess_peg:
                             black_pegs += 1
                     white_pegs -= black_pegs
+                    if (black_pegs == 4):
+                        self.won = True
+                        self.button_list.append(arcade.Sprite('./images/continue.png', 0.4, center_x=90, center_y=480))
+
                     self.guesses.append((self.circuit.results, (black_pegs, white_pegs)))
 
             elif (buttons[0] == self.button_list[1]):
@@ -265,9 +269,13 @@ class GameView(arcade.View):
                 for gate in self.gate_list:
                     self.reset_gate(gate)
                 self.circuit.update_results()
-            elif (buttons[0] == self.button_list[2]):
+            elif (buttons[0] == self.button_list[2] and (not self.won)):
                 # print('instructions')
                 instruction_view = InstructionView(self.level)
+                self.window.show_view(instruction_view)
+            elif (len(self.button_list) == 5 and buttons[0] == self.button_list[4]):
+                # print('continue')
+                instruction_view = InstructionView(self.level + 1)
                 self.window.show_view(instruction_view)
 
 
