@@ -138,7 +138,7 @@ class Circuit():
 class GameView(arcade.View):
     """ Main application class. """
 
-    def __init__(self):
+    def __init__(self, level):
         super().__init__()
 
         arcade.set_background_color(arcade.color.GAINSBORO)
@@ -150,7 +150,7 @@ class GameView(arcade.View):
         self.circuit = None
         self.guesses = None
         self.solution = None
-        self.level = 1
+        self.level = level
 
     def setup(self):
         """ Set up the game here. Call this function to restart the game. """
@@ -163,6 +163,9 @@ class GameView(arcade.View):
         # load in all UI buttons
         self.button_list.append(arcade.Sprite('./images/submit.png', 0.4, center_x=910, center_y=65))
         self.button_list.append(arcade.Sprite('./images/trash.png', 0.4, center_x=655, center_y=65))
+        self.button_list.append(arcade.Sprite('./images/info.png', 0.4, center_x=900, center_y=480))
+        self.button_list.append(arcade.Sprite('./images/exit.png', 0.4, center_x=950, center_y=480))
+
 
         # draw the 'circuitboard'
         for i in range(4):
@@ -262,6 +265,10 @@ class GameView(arcade.View):
                 for gate in self.gate_list:
                     self.reset_gate(gate)
                 self.circuit.update_results()
+            elif (buttons[0] == self.button_list[2]):
+                # print('instructions')
+                instruction_view = InstructionView(self.level)
+                self.window.show_view(instruction_view)
 
 
     def on_mouse_release(self, x: float, y: float, button: int,
@@ -301,24 +308,32 @@ class GameView(arcade.View):
             self.held_gate.center_y += dy
 
 class InstructionView(arcade.View):
+    def __init__(self, level):
+        """ This is run once when we switch to this view """
+        super().__init__()
+        self.level = level
+        self.texture = arcade.load_texture(f"./images/instructions{level}.png")
+
     """ View to show instructions for each level """
-    def on_show(self):
-        arcade.set_background_color(arcade.csscolor.GAINSBORO)
+    # def on_show(self):
+    #     arcade.set_background_color(arcade.csscolor.GAINSBORO)
     
     def on_draw(self):
         """ Draw this view """
         arcade.start_render()
+        self.texture.draw_sized(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
+                                SCREEN_WIDTH, SCREEN_HEIGHT)
 
     def on_mouse_press(self, _x, _y, _button, _modifiers):
         """ If the user presses the mouse button, start the game. """
-        game_view = GameView()
+        game_view = GameView(self.level)
         game_view.setup()
         self.window.show_view(game_view)
 
 def main():
     """ Main method """
     window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
-    start_view = InstructionView()
+    start_view = InstructionView(1)
     window.show_view(start_view)
     arcade.run()
 
