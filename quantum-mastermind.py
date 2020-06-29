@@ -32,7 +32,7 @@ class Gate(arcade.Sprite):
 
         # Image for the sprite
         self.image_file_name = f'./images/{self.operator}.png'
-        self.inital_position = None
+        self.initial_position = None
         self.node = None
 
         super().__init__(self.image_file_name, scale)
@@ -51,8 +51,10 @@ class Circuit():
     def __init__(self, nodes, gates):
         self.nodes = nodes
         self.gates = gates
+        self.solution = None
         self.backend = Aer.get_backend('statevector_simulator')
         self.results = []
+        self.guess = []
         self.update_results()
 
     def available_gates(self, gate):
@@ -63,8 +65,8 @@ class Circuit():
         return self.gates[gate] - s
 
     def update_results(self):
-        arcade.finish_render()
         self.results = []
+        self.guess = []
         circuits = []
         for i in range(4):
             qc = QuantumCircuit(1)
@@ -86,38 +88,81 @@ class Circuit():
         
         for i in range(4):
             res = execute(circuits[i], self.backend).result()
-            print(res.get_statevector())
-            if (np.array_equal(res.get_statevector(), [0, 1])): # 0 state
-                self.results.append(arcade.color.WHITE)
-            else:
+            if (np.array_equal(res.get_statevector(None, 3), [1, 0])): # 0 state
                 self.results.append(arcade.color.BLACK)
-        print(self.results)
-        arcade.start_render()
+                self.guess.append('0')
+            elif (np.array_equal(res.get_statevector(None, 3), [1j, 0])): # 0 state
+                self.results.append(arcade.color.BLACK)
+                self.guess.append('0')  
+            elif (np.array_equal(res.get_statevector(None, 3), [-1j, 0])): # 0 state
+                self.results.append(arcade.color.BLACK)
+                self.guess.append('0')
+                
+            elif (np.array_equal(res.get_statevector(None, 3), [0, 1])): # 1 state
+                self.results.append(arcade.color.WHITE) 
+                self.guess.append('1')
+            elif (np.array_equal(res.get_statevector(None, 3), [0, -1])): # 1 state
+                self.results.append(arcade.color.WHITE) 
+                self.guess.append('1')
+            elif (np.array_equal(res.get_statevector(None, 3), [0, 1j])): # 1 state
+                self.results.append(arcade.color.WHITE)
+                self.guess.append('1')
+            elif (np.array_equal(res.get_statevector(None, 3), [0, -1j])): # 1 state
+                self.results.append(arcade.color.WHITE)                
+                self.guess.append('1')
 
-class QMastermind(arcade.Window):
+            elif (np.array_equal(res.get_statevector(None, 3), [.707, .707])): 
+                self.results.append(arcade.color.BLUE)
+                self.guess.append('+')
+
+            elif (np.array_equal(res.get_statevector(None, 3), [-.707, -.707])): 
+                self.results.append(arcade.color.BLUE)
+                self.guess.append('+')
+                
+            elif (np.array_equal(res.get_statevector(None, 3), [.707, -.707])): 
+                self.results.append(arcade.color.RED)
+                self.guess.append('-')
+            elif (np.array_equal(res.get_statevector(None, 3), [-.707, .707])): 
+                self.results.append(arcade.color.RED)
+                self.guess.append('-')
+            elif (np.array_equal(res.get_statevector(None, 3), [-.707j, .707j])): 
+                self.results.append(arcade.color.RED)
+                self.guess.append('-')
+            elif (np.array_equal(res.get_statevector(None, 3), [.707j, -.707j])): 
+                self.results.append(arcade.color.RED) 
+                self.guess.append('-')
+            # eventuall +i and -i
+            else:
+                self.results.append(arcade.color.BROWN)
+
+class GameView(arcade.View):
     """ Main application class. """
 
     def __init__(self):
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
-
-        # Gate list
-        self.gate_list = None
+        super().__init__()
 
         arcade.set_background_color(arcade.color.GAINSBORO)
 
+        self.button_list = None
+        self.gate_list = None
         self.held_gate = None
         self.nodes_list = None
-        self.gui_list = None
+        self.circuit = None
+        self.guesses = None
+        self.solution = None
         self.level = 1
 
     def setup(self):
         """ Set up the game here. Call this function to restart the game. """
         self.gate_list = arcade.SpriteList()
+        self.button_list = arcade.SpriteList(is_static=True)
         self.wires_list = arcade.SpriteList(is_static=True)
         self.nodes_list = arcade.SpriteList(is_static=True)
+        self.guesses = []
 
-        # draw gate library
-
+        # load in all UI buttons
+        self.button_list.append(arcade.Sprite('./images/submit.png', 0.4, center_x=910, center_y=65))
+        self.button_list.append(arcade.Sprite('./images/trash.png', 0.4, center_x=655, center_y=65))
 
         # draw the 'circuitboard'
         for i in range(4):
@@ -128,7 +173,9 @@ class QMastermind(arcade.Window):
 
         # load gates in here
         level_data = self.load_level(self.level)
-        self.circuit = Circuit(self.nodes_list, level_data)
+        self.circuit = Circuit(self.nodes_list, level_data['gates'])
+        self.solution = level_data['solution']
+
 
     def load_level(self, level):
         # read in a text file with the allowed gates
@@ -138,10 +185,10 @@ class QMastermind(arcade.Window):
             level = level_data[f'level{self.level}']
 
             for i in range(len(GATES)):
-                for j in range(level[GATES[i]]):
+                for j in range(level['gates'][GATES[i]]):
                     gate = Gate(GATES[i], GATE_SCALE)
                     gate.position = 100, (80 + i*75)
-                    gate.inital_position = gate.position
+                    gate.initial_position = gate.position
                     self.gate_list.append(gate)
 
         return level
@@ -164,7 +211,22 @@ class QMastermind(arcade.Window):
             arcade.Sprite('./images/empty.png', scale=0.3, center_x=100, center_y=(80+i*75)).draw()
         for i in range(len(GATES)):
             arcade.draw_text(f'x{self.circuit.available_gates(GATES[i])}', 45, 70+(i*75), arcade.color.BLACK, 16)
+        arcade.draw_rectangle_filled(875, 270, 4, 330, arcade.color.BLACK)
+        arcade.draw_rectangle_filled(800, 105, 330, 4, arcade.color.BLACK)
 
+        # draw the guesses
+        for i in range(len(self.guesses)):
+            for j in range(4):
+                arcade.draw_circle_filled(660 + (j * 56), 140 + (i * 53), 20, self.guesses[i][0][j])
+            # draw the clues
+            black, white = self.guesses[i][1]
+            for j in range(black):
+                arcade.draw_circle_filled(900 + (j * 20), 148 + (i * 53), 7, arcade.color.BLACK)
+            for j in range(white):
+                arcade.draw_circle_filled(900 + (j * 20), 128 + (i * 53), 7, arcade.color.WHITE)
+            
+
+        self.button_list.draw()
         self.wires_list.draw()
         self.nodes_list.draw()
         self.gate_list.draw()
@@ -176,7 +238,31 @@ class QMastermind(arcade.Window):
         if len(gates) > 0:
             self.held_gate = gates[-1]
 
-        # more
+        buttons = arcade.get_sprites_at_point((x, y), self.button_list)
+        if (buttons) :
+            if (buttons[0] == self.button_list[0]):
+                if (not (sum([self.circuit.available_gates(GATES[i]) for i in range(len(GATES))]) == 0)): # you must use all the gates
+                    pass
+                else:
+                    # check if all the gates are used
+                    self.circuit.update_results()
+                    # print('submit')
+                    black_pegs = 0
+                    white_pegs = 0
+                    for color in ['0', '1', '+', '-']:
+                        white_pegs += min(self.solution.count(color), self.circuit.guess.count(color))
+                    for code_peg, guess_peg in zip(self.solution, self.circuit.guess):
+                        if code_peg == guess_peg:
+                            black_pegs += 1
+                    white_pegs -= black_pegs
+                    self.guesses.append((self.circuit.results, (black_pegs, white_pegs)))
+
+            elif (buttons[0] == self.button_list[1]):
+                # print('trash')
+                for gate in self.gate_list:
+                    self.reset_gate(gate)
+                self.circuit.update_results()
+
 
     def on_mouse_release(self, x: float, y: float, button: int,
                          modifiers: int):
@@ -197,14 +283,16 @@ class QMastermind(arcade.Window):
                 reset_position = False
 
         if reset_position:
-            if (self.held_gate.node):
-                self.held_gate.node.gate = None
-                self.held_gate.node = None
-            self.held_gate.position = self.held_gate.inital_position
+            self.reset_gate(self.held_gate)
 
         self.held_gate = None
         self.circuit.update_results()
 
+    def reset_gate(self, gate):
+        if (gate.node):
+            gate.node.gate = None
+            gate.node = None
+        gate.position = gate.initial_position
 
     def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):
         """ User moves mouse """
@@ -212,11 +300,26 @@ class QMastermind(arcade.Window):
             self.held_gate.center_x += dx
             self.held_gate.center_y += dy
 
+class InstructionView(arcade.View):
+    """ View to show instructions for each level """
+    def on_show(self):
+        arcade.set_background_color(arcade.csscolor.GAINSBORO)
+    
+    def on_draw(self):
+        """ Draw this view """
+        arcade.start_render()
+
+    def on_mouse_press(self, _x, _y, _button, _modifiers):
+        """ If the user presses the mouse button, start the game. """
+        game_view = GameView()
+        game_view.setup()
+        self.window.show_view(game_view)
 
 def main():
     """ Main method """
-    window = QMastermind()
-    window.setup()
+    window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+    start_view = InstructionView()
+    window.show_view(start_view)
     arcade.run()
 
 
