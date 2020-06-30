@@ -1,6 +1,3 @@
-"""
-Solitaire clone.
-"""
 import arcade
 import json
 import numpy as np
@@ -114,7 +111,6 @@ class Circuit():
             elif (np.array_equal(res.get_statevector(None, 3), [.707, .707])): 
                 self.results.append(arcade.color.BLUE)
                 self.guess.append('+')
-
             elif (np.array_equal(res.get_statevector(None, 3), [-.707, -.707])): 
                 self.results.append(arcade.color.BLUE)
                 self.guess.append('+')
@@ -243,7 +239,7 @@ class GameView(arcade.View):
 
         buttons = arcade.get_sprites_at_point((x, y), self.button_list)
         if (buttons) :
-            if (buttons[0] == self.button_list[0] and (not self.won)):
+            if (buttons[0] == self.button_list[0] and (not self.won) and (not (len(self.guesses) >= 6))):
                 if (not (sum([self.circuit.available_gates(GATES[i]) for i in range(len(GATES))]) == 0)): # you must use all the gates
                     pass
                 else:
@@ -273,6 +269,10 @@ class GameView(arcade.View):
                 # print('instructions')
                 instruction_view = InstructionView(self.level)
                 self.window.show_view(instruction_view)
+            elif (buttons[0] == self.button_list[3]):
+                game_view = GameView(self.level)
+                game_view.setup()
+                self.window.show_view(game_view)
             elif (len(self.button_list) == 5 and buttons[0] == self.button_list[4]):
                 # print('continue')
                 instruction_view = InstructionView(self.level + 1)
@@ -338,13 +338,68 @@ class InstructionView(arcade.View):
         game_view.setup()
         self.window.show_view(game_view)
 
+class RulesView(arcade.View):
+    def __init__(self):
+        super().__init__()
+        self.texture = arcade.load_texture("./images/rules_screen.png")
+
+    def on_draw(self):
+        arcade.start_render()
+        self.texture.draw_sized(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
+                                SCREEN_WIDTH, SCREEN_HEIGHT)
+
+    def on_mouse_press(self, x, y, button, key_modifiers):
+        """ Called when the user presses a mouse button. """
+
+        # back to title screen
+        start_view = TitleView()
+        start_view.setup()
+        self.window.show_view(start_view)
+                
+
+class TitleView(arcade.View):
+    def __init__(self):
+        super().__init__()
+
+        self.button_list = None
+        self.texture = arcade.load_texture("./images/title.png")
+    
+    def setup(self):
+        self.button_list = arcade.SpriteList(is_static=True)
+
+        # load in all UI buttons
+        self.button_list.append(arcade.Sprite('./images/play.png', 0.4, center_x=810, center_y=295))
+        self.button_list.append(arcade.Sprite('./images/rules.png', 0.4, center_x=810, center_y=225))
+        # self.button_list.append(arcade.Sprite('./images/exit.png', 0.4, center_x=950, center_y=480))
+
+    def on_draw(self):
+        arcade.start_render()
+        self.texture.draw_sized(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
+                                SCREEN_WIDTH, SCREEN_HEIGHT)
+
+        self.button_list.draw()
+
+    def on_mouse_press(self, x, y, button, key_modifiers):
+        """ Called when the user presses a mouse button. """
+
+        buttons = arcade.get_sprites_at_point((x, y), self.button_list)
+        if (buttons) :
+            if (buttons[0] == self.button_list[0]):
+                # play game
+                instruction_view = InstructionView(1)
+                self.window.show_view(instruction_view)    
+            elif (buttons[0] == self.button_list[1]):
+                # show rules
+                rules_view = RulesView()
+                self.window.show_view(rules_view)
+
 def main():
     """ Main method """
     window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
-    start_view = InstructionView(1)
+    start_view = TitleView()
+    start_view.setup()
     window.show_view(start_view)
     arcade.run()
-
 
 if __name__ == "__main__":
     main()
