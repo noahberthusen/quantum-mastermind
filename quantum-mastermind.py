@@ -162,7 +162,7 @@ class GameView(arcade.View):
         self.button_list.append(arcade.Sprite('./images/trash.png', 0.4, center_x=655, center_y=65))
         self.button_list.append(arcade.Sprite('./images/info.png', 0.4, center_x=900, center_y=480))
         self.button_list.append(arcade.Sprite('./images/exit.png', 0.4, center_x=950, center_y=480))
-
+        self.button_list.append(arcade.Sprite('./images/help.png', 0.4, center_x=850, center_y=480))
 
         # draw the 'circuitboard'
         for i in range(4):
@@ -273,7 +273,11 @@ class GameView(arcade.View):
                 game_view = GameView(self.level)
                 game_view.setup()
                 self.window.show_view(game_view)
-            elif (len(self.button_list) == 5 and buttons[0] == self.button_list[4]):
+            elif (buttons[0] == self.button_list[4]):
+                # show rules
+                rules_view = RulesView(self.level)
+                self.window.show_view(rules_view)
+            elif (len(self.button_list) == 6 and buttons[0] == self.button_list[5]):
                 # print('continue')
                 instruction_view = InstructionView(self.level + 1)
                 self.window.show_view(instruction_view)
@@ -339,8 +343,9 @@ class InstructionView(arcade.View):
         self.window.show_view(game_view)
 
 class RulesView(arcade.View):
-    def __init__(self):
+    def __init__(self, level):
         super().__init__()
+        self.level = level
         self.texture = arcade.load_texture("./images/rules_screen.png")
 
     def on_draw(self):
@@ -350,11 +355,16 @@ class RulesView(arcade.View):
 
     def on_mouse_press(self, x, y, button, key_modifiers):
         """ Called when the user presses a mouse button. """
-
-        # back to title screen
-        start_view = TitleView()
-        start_view.setup()
-        self.window.show_view(start_view)
+        if (self.level == 0):
+            # back to title screen
+            start_view = TitleView()
+            start_view.setup()
+            self.window.show_view(start_view)
+        else:
+            # go to specific level
+            game_view = GameView(self.level)
+            game_view.setup()
+            self.window.show_view(game_view)
                 
 
 class TitleView(arcade.View):
@@ -390,7 +400,7 @@ class TitleView(arcade.View):
                 self.window.show_view(instruction_view)    
             elif (buttons[0] == self.button_list[1]):
                 # show rules
-                rules_view = RulesView()
+                rules_view = RulesView(0)
                 self.window.show_view(rules_view)
 
 def main():
